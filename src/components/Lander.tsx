@@ -3,9 +3,9 @@ import {
   Flex,
   Input,
   FormControl,
-  Grid,
   Text,
   IconButton,
+  Box,
 } from '@chakra-ui/core'
 import { Formik, Field } from 'formik'
 import { v4 as uuidv4 } from 'uuid'
@@ -33,9 +33,14 @@ class Lander extends Component {
 
   render(): JSX.Element {
     return (
-      <Flex w="70%" h="100%" justify="center" align="center">
-        <Grid w="100%" h="100%" templateColumns="repeat(2, 1fr)" gap={6}>
-          <Flex w="100%" h="100%" justify="center" align="center">
+      <Flex w="70%" h="100%" justify="center" align="center" direction="column">
+        <Box marginY={6}>
+          <Text fontSize="6xl" as="b">
+            trck.
+          </Text>
+        </Box>
+        <Box>
+          <Flex w="100%" justify="center" align="center">
             <Formik
               initialValues={{ newTodo: '' }}
               onSubmit={(values, { resetForm }) => {
@@ -73,10 +78,10 @@ class Lander extends Component {
           </Flex>
           <Flex
             w="100%"
-            h="100%"
             justify="center"
             align="center"
             direction="column"
+            my={4}
           >
             {Object.keys(this.state.events).length === 0 ? (
               <Text my={1}>No events yet, add one to get started!</Text>
@@ -112,7 +117,7 @@ class Lander extends Component {
               ))
             )}
           </Flex>
-        </Grid>
+        </Box>
       </Flex>
     )
   }
