@@ -15,6 +15,7 @@
   <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
   <img alt="Maintained" src="https://img.shields.io/badge/Maintained-Yes-blue">
   <img alt="awesome" src="https://img.shields.io/badge/awesome-yes-purple">
+  <br />
   <img alt="format" src="https://github.com/safinsingh/trck/workflows/format/badge.svg" />
   <img alt="lint" src="https://github.com/safinsingh/trck/workflows/lint/badge.svg" />
 </p>
