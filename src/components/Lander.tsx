@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Flex,
   Input,
@@ -12,6 +12,9 @@ import {
 import { Formik, Field, FormikProps } from 'formik'
 import { v4 as uuidv4 } from 'uuid'
 
+import { db, auth } from '../firebase/firestore'
+import { useHistory } from 'react-router-dom'
+
 interface event {
   [id: string]: { name: string; finished: boolean }
 }
@@ -21,8 +24,40 @@ interface eventState {
 }
 
 const Lander = (): JSX.Element => {
-  const [state, setState] = useState<eventState>({ events: {} })
+  const [state, setState] = useState<any | null>({ events: {} })
   const { colorMode, toggleColorMode } = useColorMode()
+  const history = useHistory()
+
+  useEffect(() => {
+    if (auth.currentUser) {
+      const userDocRef = auth.currentUser.uid
+      db.collection(userDocRef)
+        .doc('todos')
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setState(doc.data())
+          } else {
+            db.collection(userDocRef).doc('todos').set(state)
+          }
+        })
+        .catch((error) => {
+          console.log('Error getting document:', error)
+        })
+    } else {
+      history.push('/login')
+    }
+  }, [])
+
+  useEffect(() => {
+    if (Object.keys(state.events).length !== 0) {
+      console.log(state.events)
+      if (auth.currentUser) {
+        const userDocRef = auth.currentUser!.uid
+        db.collection(userDocRef).doc('todos').set(state)
+      }
+    }
+  }, [state])
 
   const removeItem = (e: any) => {
     const newEvents = state.events
@@ -90,6 +125,7 @@ const Lander = (): JSX.Element => {
                           variant="filled"
                           bg={colorMode === 'dark' ? 'gray.800' : 'gray.200'}
                           rounded="lg"
+                          isLoading
                         />
                       </FormControl>
                     )}
@@ -140,7 +176,7 @@ const Lander = (): JSX.Element => {
             )}
           </Flex>
         </Box>
-      </Flex>{' '}
+      </Flex>
     </Flex>
   )
 }
