@@ -128,6 +128,7 @@ const Lander = (): JSX.Element => {
                   newTodo: string
                 }>
               ) => (
+                // eslint-disable-next-line
                 <form onSubmit={props.handleSubmit} style={{ width: '80%' }}>
                   <Field name="newTodo" w="100%">
                     {({ field }: { field: string }) => (
