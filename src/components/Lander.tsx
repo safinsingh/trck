@@ -72,6 +72,17 @@ const Lander = (): JSX.Element => {
     })
   }
 
+  const logOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        history.push('/')
+      })
+      .catch((err) => {
+        alert(err)
+      })
+  }
+
   return (
     <Flex
       h="100vh"
@@ -87,6 +98,9 @@ const Lander = (): JSX.Element => {
           right="10px"
         >
           Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+        </Button>
+        <Button onClick={logOut} position="absolute" bottom="10px" left="10px">
+          Log Out
         </Button>
         <Box marginY={4}>
           <Text fontSize="6xl" as="b">
