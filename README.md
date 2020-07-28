@@ -3,9 +3,9 @@
 </h1>
 
 <h3 align="center">
-    <i>
-        🎨 A web app to track your todos, built with React, Chakra UI, and Firebase
-    </i>
+  <i>
+    🎨 A web app to track your todos, built with React, Chakra UI, and Firebase
+  </i>
 </h3>
 
 <p align="center">
