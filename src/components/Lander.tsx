@@ -47,6 +47,7 @@ const Lander = (): JSX.Element => {
     } else {
       history.push('/login')
     }
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {

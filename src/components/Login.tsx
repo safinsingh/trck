@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Flex, Input, Text, Box, Button, useColorMode } from '@chakra-ui/core'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { useHistory } from 'react-router-dom'
@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom'
 import { auth } from '../firebase/firestore'
 
 const Login = (): JSX.Element => {
-  const [state, setState] = useState<any | null>({ events: {} })
   const { colorMode, toggleColorMode } = useColorMode()
 
   const history = useHistory()
