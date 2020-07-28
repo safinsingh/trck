@@ -1,3 +1,3 @@
-## CRA Template
+# trck.
 
-Personal template for CRA with TypeScript/ESLint/Prettier/Yarn
+A todo list built with React, Chakra UI, and Firebase
