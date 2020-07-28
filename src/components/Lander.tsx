@@ -29,24 +29,26 @@ const Lander = (): JSX.Element => {
   const history = useHistory()
 
   useEffect(() => {
-    if (auth.currentUser) {
-      const userDocRef = auth.currentUser.uid
-      db.collection(userDocRef)
-        .doc('todos')
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            setState(doc.data())
-          } else {
-            db.collection(userDocRef).doc('todos').set(state)
-          }
-        })
-        .catch((error) => {
-          console.log('Error getting document:', error)
-        })
-    } else {
-      history.push('/login')
-    }
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        const userDocRef = user.uid
+        db.collection(userDocRef)
+          .doc('todos')
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              setState(doc.data())
+            } else {
+              db.collection(userDocRef).doc('todos').set(state)
+            }
+          })
+          .catch((error) => {
+            console.log('Error getting document:', error)
+          })
+      } else {
+        history.push('/login')
+      }
+    })
     // eslint-disable-next-line
   }, [])
 
